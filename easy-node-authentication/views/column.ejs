@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>글 제목</title>
+
+    <link rel="stylesheet" href="/lib/css/bundle.css">
+
+</head>
+<body>
+    <div class="column-wrapper">
+        <div class="title">
+            <h1 class="title-text" id="colTitle"></h1>
+        </div>
+    
+        <div class="content">
+            <div class="container">
+                <div class="column-content">
+                    <p id="colContent"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment-wrapper">
+
+        <div class="container">
+            <!-- 새 댓글 달기 -->
+            <div class="comment-add">
+                <input class="comment-input" id="commentInput" type="text">
+                <button class="btn" id="commentSaveBtn">댓글 등록하기</button>
+            </div>
+    
+            <!-- 댓글 목록 -->
+            <ul class="comment-list" id="commentList">
+                <li class="comment-item">
+                    <!-- 번호 -->
+                    <div class="comment-num"></div>
+                    <!-- 내용 -->
+                    <div class="comment-content"></div>
+                    <!-- 작성일시 -->
+                    <div class="comment-date"></div>
+                    <!-- 삭제 버튼 -->
+                    <button class="btn btn-remove">삭제</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/lib/js/common.js"></script>
+<script src="/lib/js/main.js"></script>
+<script src="/lib/js/detail.js"></script>
+<script src="/lib/js/comment.js"></script>
+
+
+</html>

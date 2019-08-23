@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <title>Node Authentication</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <style>
+        body         { padding-top:80px; }
+    </style>
+</head>
+<body>
+<div class="container">
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h1><span class="fa fa-sign-in"></span> Signup</h1>
+
+    <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %>
+
+    <!-- LOGIN FORM -->
+    <form action="/signup" method="post">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" name="email">
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" name="password">
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <input id="address" type="text" class="form-control" name="address">
+        </div>
+
+        <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+    </form>
+
+    <hr>
+
+    <p>Already have an account? <a href="/login">Login</a></p>
+    <p>Or go <a href="/">home</a>.</p>
+
+    <div class="text-center">
+        <p>PETS</p>
+    </div>
+
+</div>
+</div>
+
+<!-- <script src="bower_components/web3/dist/web3.min.js"></script> -->
+<script>
+    window.addEventListener('load', function() {
+    // Load WEB3
+    // Check wether it's already injected by something else (like Metamask or Parity Chrome plugin)
+    if(typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+        //console.log("metaAddress")
+    // Or connect to a node
+    }
+
+    // Check the connection
+    if(!web3.isConnected()) {
+        console.error("Not connected");
+    }
+    
+
+    var accounts = ethereum.enable()
+    .then( function(account) {
+        //console.log(account);
+        var accountInterval = setInterval(function() {
+        if (web3.eth.accounts[0] !== account) {
+            account = web3.eth.accounts[0];
+            document.getElementById("address").value = account;
+        }
+        }, 100);
+
+    });
+    
+
+    });
+
+</script>
+</body>
+</html>

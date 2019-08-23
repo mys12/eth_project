@@ -1,0 +1,153 @@
+@charset "utf-8";
+
+/* 버튼 기본 스타일(나중에 옮겨야 됨) */
+.btn{
+    background-image: none;
+    padding: 6px 12px;
+    box-shadow: 0;
+    background-color: inherit;
+    border: 0;
+    outline: none;
+    border-radius: 3px;
+    background-color: rgba(226, 226, 226, 0.603);
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+.btn:hover, .btn:focus{
+    background-color: #f2f2f2;
+}
+
+.title-text{
+    text-align: center;
+    font-size: 42px;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+/* 에디터 영역 */
+.column-editor-wrapper{
+    width: 640px;
+    position: absolute;
+    left: 0;
+    padding: 26px 32px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    z-index: 2;
+}
+
+/* 제목 입력 박스 */
+.column-editor-title{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 21px;
+    padding: 6px 8px;
+    font-family: 'Nanum Myeongjo', serif;
+    font-size: 28px;
+    color: rgb(0, 0, 0);
+    /* text-shadow: 1px 1px 1px rgba(0,0,0,0.12); */
+    border: 0;
+    border-bottom: 1px solid #aaa;
+}
+.column-editor-title:focus{
+    outline: none;
+}
+
+/* 내용 입력 박스 */
+.column-editor-content{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 21px;
+    padding: 6px 8px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgb(0, 0, 0);
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.12);
+    border: 0;
+}
+.column-editor-content:focus{
+    outline: none;
+}
+
+/* 리스트 영역 */
+.column-list-wrapper{
+    width: 430px;
+    position: absolute;
+    top: 42px;
+    right: 0;
+    padding: 26px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.column-list{
+    list-style: none;
+    font-size: 14px;
+}
+.column-item{
+    padding: 4px 0;
+}
+.column-item:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.column-item-anchor{
+    color: rgb(0, 0, 0);
+}
+.column-item-num, .column-item-title, .column-item-date{
+    float: left;
+}
+.column-item-num{
+    padding-right: 8px;
+}
+.column-item-title{
+    padding-right: 8px;
+}
+
+
+/* 칼럼(나중에 옮겨야 됨) */
+.column-content{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 42px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+}
+
+/* 댓글 입력 창 */
+.comment-add{
+    display: flex;
+    margin-top: 20px;
+}
+.comment-add .comment-input{
+    flex: 9;
+}
+.comment-add .btn{
+    flex: 1;
+}
+
+
+/* 댓글 리스트 */
+.comment-list{
+    padding: 0;
+}
+.comment-item{
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+.comment-item .comment-num{
+    flex: 1;
+}
+.comment-item .comment-content{
+    flex: 6;
+}
+.comment-item .comment-date{
+    flex: 2;
+}

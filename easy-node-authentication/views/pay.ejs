@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/lib/js/pay.js"></script>
+
+    <title>Donation</title>
+</head>
+    <body>
+        <div class="container">
+            <h1>Donation</h1>
+            <form>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">본인주소</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext"
+                               id="address" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">보유잔액</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext"
+                               id="balance" value="">
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#transferModal" onClick="donate()">기부하기</button>
+                <button type="button" id="historyButton" class="btn btn-primary mb-2">내역보기</button>
+
+            </form>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Timestamp</th>
+                    <th scope="col">Direction</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Tx Hash</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+            <div id="console" style="overflow-y: scroll; height: 200px; margin-top: 50px"></div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                getAccountInfo();
+                
+                $('#historyButton').click(function() {
+                    console.log('historybutton');
+                    getAccountHistory();
+                });
+            });
+           
+            function getAccountInfo() {
+              $.get('/api/get_info', function(data) {
+                console.log(data);
+                $('#address').val(data.address);
+                $('#balance').val(data.balance);
+              });
+            }
+
+            function getAccountHistory() {
+              $.get('/api/get_history', function(data) {
+                  var tx_history = data.result.reverse();
+                  $('.table > tbody').html('');
+                  for( var i = 0; i < 10; i++) {
+                      
+                    var tx = tx_history[i];
+                    var tx_hash = tx.hash;
+                    var tx_timeStamp = tx.timeStamp;
+                    var tx_from = tx.from;
+                    var tx_to = tx.to;
+                    var tx_value = tx.value;
+                    var html = '';
+                    
+                    html += '<tr>';
+                    html +=     '<th scope="row">' + i + '</t>';
+                    html +=     '<td>' + tx_timeStamp + '</td>';
+                    html +=     '<td>' + tx_from + '  >  ' + tx_to + '</td>';
+                    html +=     '<td>' + tx_value + '</td>';
+                    html +=     '<td>' + tx_hash + '</td>';
+                    html += '</tr>';
+                    $('.table > tbody').append(html);
+                  } 
+              })
+            }
+            
+        </script>
+
+        <script>
+    window.addEventListener('load', function() {
+    // Load WEB3
+    // Check wether it's already injected by something else (like Metamask or Parity Chrome plugin)
+    if(typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+        //console.log("metaAddress")
+    // Or connect to a node
+    }
+
+    // Check the connection
+    if(!web3.isConnected()) {
+        console.error("Not connected");
+    }
+    
+
+    var accounts = ethereum.enable()
+    .then( function(account) {
+        //console.log(account);
+        var accountInterval = setInterval(async function() {
+        if (web3.eth.accounts[0] !== account) {
+            account = web3.eth.accounts[0];
+            console.log(account);
+            document.getElementById("address").value = account;
+            web3.eth.getBalance(account, function(err, result) {
+                balance = web3.fromWei(result, 'ether');
+                console.log(balance);
+                document.getElementById("balance").value = balance;
+            })
+            }
+        }, 100);
+
+    });
+});
+</script>
+
+</body>
+</html>

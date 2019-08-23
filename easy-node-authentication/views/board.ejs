@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>게시판</title>
+
+    <link rel="stylesheet" href="/lib/css/bundle.css">
+
+</head>
+<body>
+    <div class="editor-wrapper">
+        <div class="title">
+            <h1 class="title-text">게시판</h1>
+        </div>
+    
+        <div class="content">
+            <div class="container">
+        
+                <!-- 새로운 게시물 등록 -->
+                <div class="column-editor-wrapper">
+                    <div class="column-editor">
+        
+                        <input class="column-editor-title" id="inputTitle" type="inputText" placeholder="제목을 입력해주세요." autofocus>
+        
+                        <textarea class="column-editor-content" id="inputContent" cols="30" rows="8" placeholder="내용을 입력해주세요."></textarea>
+        
+                        <button class="btn" id="saveColumn">저장하기</button>
+                        
+                    </div>
+                </div>
+        
+                <!-- 게시물 목록 -->
+                <div class="column-list-wrapper">
+                    <ul class="column-list" id="colList">
+                        <li class="column-item">
+                            <a href="/column" class="column-item-anchor">
+                                <div class="column-item-num"><span>1</span></div>
+                                <div class="column-item-title"><span>제목입니다</span></div>
+                                <div class="column-item-date"><span>2018.12.12 12:00</span></div>
+                            </a>
+                            <button class="btn">삭제</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/lib/js/common.js"></script>
+<script src="/lib/js/main.js"></script>
+
+
+</html>

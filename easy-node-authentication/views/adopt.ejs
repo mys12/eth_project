@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <script type="text/javascript" src="/lib/js/app.js"></script> -->
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Pet Goods</title>
+
+    <!-- Bootstrap -->
+    <link href="/lib/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+    <script id="__bs_script__">//<![CDATA[
+        //document.write("<script async src='/lib/js/browser-sync-client.js?v=2.26.7'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                <h1 class="text-center">Pet Goods</h1>
+                <hr />
+                <br />
+            </div>
+        </div>
+        <div>
+            <!-- 계정: metamask 연동한 본인주소 안보이게 히든타입으로 설정 -->
+            <p></p>
+            <input type="hidden" id="address" value="" placeholder="주소를 입력해주세요" />
+            <p></p>
+        </div>
+        <div id="petsRow" class="row">
+            <!-- PETS LOAD HERE -->
+        </div>
+    </div>
+
+    <div id="petTemplate" style="display: none;">
+        <div class="col-sm-13 col-md-7 col-lg-4">
+            <div class="panel panel-default panel-pet">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Scrappy</h3>
+                </div>
+                <div class="panel-body">
+                    <img alt="140x140" data-src="holder.js/140x140" class="img-rounded img-center" style="width: 100%;"
+                        src="https://animalso.com/wp-content/uploads/2017/01/Golden-Retriever_6.jpg"
+                        data-holder-rendered="true">
+                    <br /><br />
+                    <strong>상품 </strong>: <span class="goods">Golden Retriever</span><br />
+                    <strong>사용기간 </strong>: <span class="goods-use">3</span><br />
+                    <strong>가격 </strong>: <span class="goods-cost">30</span><br />
+
+                    <button id="0" type="button" class="btn btn-default btn-adopt" data-toggle="modal"
+                        data-target="#transferModal">BUY</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transfer Modal -->
+    <div class="modal fade" id="transferModal" tabindex="-1" role="dialog" aria-labelledby="transferModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">구매하기</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" id="transferForm">
+                        <!-- <div class="form-group">
+                            <label>Contract</label>
+                            <input type="text" class="form-control" name="contract" value="">
+                        </div> -->
+                        <div class="form-group">
+                            <label>판매자 주소</label>
+                            <input type="text" class="form-control" name="to_address"
+                                value="0x8d008189a39788c218348780354A9F4306E802f6" id="to_address">
+                        </div>
+                        <div class="form-group">
+                            <label>보낼 금액</label>
+                            <input type="text" class="form-control" name="to_amount" value="2" id="to_amount">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="transferButton" class="btn btn-primary"
+                        onClick="ercTransfer()">전송하기</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        $(document).ready(function () {
+            // bind event
+            $('#transferButton').click(function () {
+                transfer();
+            });
+        });
+
+        function transfer() {
+            var data = $('#transferForm').serialize();
+            $.post('/api/transfer', data, function (data) {
+                var result = data.result;
+                if (result == 'success') {
+                    alert('트랜잭션 성공')
+
+                } else {
+                    alert('트랜잭션 실패')
+                }
+            });
+        }
+    </script> -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/lib/web3-light@0.20.6.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/lib/js/bootstrap.min.js"></script>
+    <script src="/lib/js/web3.min.js"></script>
+    <!-- <script src="/lib/js/truffle-contract.js"></script>
+    <script src="/lib/js/app.js"></script> -->
+    <script type="text/javascript" src="/lib/web3-light@0.20.6.js"></script>
+    <script type="text/javascript" src="/lib/js/adopt.js"></script>
+    <script type="text/javascript" src="/lib/js/adopt_abi.js"></script>
+
+    <!-- <script src="bower_components/web3/dist/web3.min.js"></script> -->
+    <script>
+        window.addEventListener('load', function () {
+            // Load WEB3
+            // Check wether it's already injected by something else (like Metamask or Parity Chrome plugin)
+            if (typeof web3 !== 'undefined') {
+                web3 = new Web3(web3.currentProvider);
+                //console.log("metaAddress")
+                // Or connect to a node
+            }
+
+            // Check the connection
+            if (!web3.isConnected()) {
+                console.error("Not connected");
+            }
+
+            var accounts = ethereum.enable()
+                .then(function (account) {
+                    //console.log(account);
+                    var accountInterval = setInterval(function () {
+                        if (web3.eth.accounts[0] !== account) {
+                            account = web3.eth.accounts[0];
+                            document.getElementById("address").value = account;
+                        }
+                    }, 100);
+
+                });
+
+
+        });
+
+
+
+    </script>
+</body>
+
+</html>

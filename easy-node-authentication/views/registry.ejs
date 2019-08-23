@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/lib/web3-light@0.20.6.js"></script>
+    <script type="text/javascript" src="/lib/js/register_abi.js"></script>
+    <script type="text/javascript" src="/lib/js/register.js"></script>
+    <!-- <script src="bower_components/web3/dist/web3.min.js"></script> -->
+    
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/lib/css/style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="mt-3 mb-4">동물 등록</h1>
+      <div>
+        계정:
+        <input
+          type="text"
+          id="address"
+          value=""
+          placeholder="주소를 입력해주세요"
+        />
+        <p></p>
+      </div>
+      <br />
+      <div>
+        <input type="text" id="petage" placeholder="Pet Age" value="" />
+        <input type="text" id="breed" placeholder="Breed" value="" />
+        <input type="text" id="gender" placeholder="Gender" value="" />
+        <input type="text" id="location" placeholder="Location" value="" />
+
+        <button onClick="addPet()">등록</button>
+      </div>
+      <table style="width:100%" id="table1"></table>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.0.min.js"
+      integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+      crossorigin="anonymous"
+    ></script>
+   
+<script>
+    window.addEventListener('load', function() {
+    // Load WEB3
+    // Check wether it's already injected by something else (like Metamask or Parity Chrome plugin)
+    if(typeof web3 !== 'undefined') {
+        web3 = new Web3(web3.currentProvider);
+        //console.log("metaAddress")
+    // Or connect to a node
+    }
+
+    // Check the connection
+    if(!web3.isConnected()) {
+        console.error("Not connected");
+    }
+    
+
+    var accounts = ethereum.enable()
+    .then( function(account) {
+        //console.log(account);
+        var accountInterval = setInterval(function() {
+        if (web3.eth.accounts[0] !== account) {
+            account = web3.eth.accounts[0];
+            document.getElementById("address").value = account;
+        }
+        }, 100);
+
+    });
+    
+
+    });
+
+
+</script>
+  </body>
+</html>
